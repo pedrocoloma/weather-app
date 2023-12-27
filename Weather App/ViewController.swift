@@ -118,6 +118,16 @@ class ViewController: UIViewController {
         return stack
     }()
     
+    private lazy var weatherByHourLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "PREVISÃO POR HORA"
+        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        label.textColor = UIColor(named: "contrastColor")
+        label.textAlignment = .center
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -125,8 +135,6 @@ class ViewController: UIViewController {
     }
 
     private func setupView() {
-        view.backgroundColor = .red
-        
         setHierarchy()
         setConstraints()
     }
@@ -135,12 +143,11 @@ class ViewController: UIViewController {
         view.addSubview(backgroundView)
         view.addSubview(headerView)
         view.addSubview(statsStackView)
+        view.addSubview(weatherByHourLabel)
         
         headerView.addSubview(cityLabel)
         headerView.addSubview(temperatureLabel)
         headerView.addSubview(weatherIcon)
-        
-        
     }
     
     private func setConstraints() {
@@ -177,6 +184,12 @@ class ViewController: UIViewController {
             statsStackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 24),
             statsStackView.widthAnchor.constraint(equalToConstant: 206),
             statsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            weatherByHourLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
+            weatherByHourLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
+            weatherByHourLabel.topAnchor.constraint(equalTo: statsStackView.bottomAnchor, constant: 16)
         ])
     }
 }
